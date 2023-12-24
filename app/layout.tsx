@@ -1,3 +1,5 @@
+import { Toaster } from 'sonner';
+
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -28,12 +30,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='en' suppressHydrationWarning={true}>
-      <ConvexClientProvider>
-        <ThemeProvider>
-          <body className={inter.className}>{children}</body>
-        </ThemeProvider>
-      </ConvexClientProvider>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body className={inter.className}>
+        <ConvexClientProvider>
+          <ThemeProvider>
+            <Toaster position="bottom-center" />
+            {children}
+          </ThemeProvider>
+        </ConvexClientProvider>
+      </body>
     </html>
   );
 }
