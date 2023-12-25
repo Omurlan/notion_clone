@@ -5,14 +5,16 @@ import { useConvexAuth } from 'convex/react';
 import { Spinner } from '@/components/spinner';
 import { redirect } from 'next/navigation';
 import { Navigation } from './_components/navigation';
+import { SearchCommand } from '@/components/search-command';
+import { SettingsModal } from '@/components/modals/settings-modal';
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
 
   if (isLoading) {
     return (
-      <div className='w-full flex items-center justify-center'>
-        <Spinner size='lg' />
+      <div className="w-full h-full flex items-center justify-center">
+        <Spinner size="lg" />
       </div>
     );
   }
@@ -22,10 +24,15 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <div className='h-full flex dark:bg-[#1F1F1F]'>
+    <div className="h-full flex dark:bg-[#1F1F1F]">
       <Navigation />
 
-      <main className='flex-1 h-full overflow-y-auto'>{children}</main>
+      <main className="flex-1 h-full overflow-y-auto">
+        <SearchCommand />
+        <SettingsModal />
+
+        {children}
+      </main>
     </div>
   );
 };

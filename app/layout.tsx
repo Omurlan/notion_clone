@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning={true}>
       <body className={inter.className}>
         <ConvexClientProvider>
-          <ThemeProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Toaster position="bottom-center" />
             {children}
           </ThemeProvider>
