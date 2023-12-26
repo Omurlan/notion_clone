@@ -6,6 +6,8 @@ import './globals.css';
 import { ThemeProvider } from '@/components/providers';
 import { ConvexClientProvider } from '@/components/providers/convexProvider';
 import { ReactNode } from 'react';
+import { ModalProvider } from '@/components/providers/modalProvider';
+import { EdgeStoreProvider } from '@/lib/edgestore';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,10 +35,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning={true}>
       <body className={inter.className}>
         <ConvexClientProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Toaster position="bottom-center" />
-            {children}
-          </ThemeProvider>
+          <EdgeStoreProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <Toaster position="bottom-center" />
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
       </body>
     </html>
