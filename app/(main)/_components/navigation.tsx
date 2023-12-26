@@ -15,7 +15,7 @@ import React, {
   useState,
 } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
-import { useParams, usePathname } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { UserItem } from '@/app/(main)/_components/user-item';
 import { useMutation } from 'convex/react';
@@ -36,6 +36,8 @@ import { Navbar } from './navbar';
 export const Navigation = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery('(max-width:768px)');
+
+  const router = useRouter();
 
   const params = useParams();
 
@@ -128,14 +130,16 @@ export const Navigation = () => {
   }, [isMobile, collapse, resetWidth]);
 
   const handleCreate = useCallback(() => {
-    const promise = create({ title: 'Untitled' });
+    const promise = create({ title: 'Untitled' }).then((documentId) =>
+      router.push(`/documents/${documentId}`),
+    );
 
     toast.promise(promise, {
       loading: 'Creating a new note...',
       success: 'New note created',
       error: 'Failed to create a new note',
     });
-  }, [create]);
+  }, [create, router]);
 
   return (
     <>

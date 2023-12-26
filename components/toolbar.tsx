@@ -112,7 +112,7 @@ export const Toolbar = (props: ToolbarProps) => {
           </IconPicker>
         )}
 
-        {!initialData.coverImg && !preview && (
+        {!initialData.coverImage && !preview && (
           <Button
             className="text-muted-foreground text-xs"
             onClick={coverImage.onOpen}
